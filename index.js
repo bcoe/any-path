@@ -1,19 +1,22 @@
 module.exports = function (obj) {
   for (var prop in obj) {
     if (hasOwnProperty.call(obj, prop)) {
-      defineGetters(prop, obj, obj[prop])
+      setupHooks(prop, obj, obj[prop])
     }
   }
 
   return obj
 }
 
-function defineGetters (prop, obj, value) {
+function setupHooks (prop, obj, value) {
   var paths = allPaths(prop.split(/[\\/]/g))
 
   paths.forEach(function (path) {
     obj.__defineGetter__(path, function () {
       return value
+    })
+    obj.__defineSetter__(path, function (newValue) {
+      value = newValue
     })
   })
 }
