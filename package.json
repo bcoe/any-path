@@ -1,0 +1,32 @@
+{
+  "name": "any-path",
+  "version": "1.0.0",
+  "description": "make the keys on an object path.sep agnostic.",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "standard",
+    "test": "tap --coverage test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/bcoe/any-path.git"
+  },
+  "keywords": [
+    "windows",
+    "path",
+    "path.sep",
+    "object",
+    "helper"
+  ],
+  "author": "Ben Coe <ben@npmjs.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bcoe/any-path/issues"
+  },
+  "homepage": "https://github.com/bcoe/any-path#readme",
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "standard": "^5.4.1",
+    "tap": "^2.3.3"
+  }
+}
