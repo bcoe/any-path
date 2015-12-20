@@ -6,22 +6,17 @@ require('tap').mochaGlobals()
 
 describe('any-test', function () {
   it('handles windows style paths', function (done) {
-    var o = {
+    var o = anyPath({
       './foo/bar/README.md': 99
-    }
-
-    anyPath(o)
-
+    })
     o['.\\foo\\bar\\README.md'].should.equal(99)
     return done()
   })
 
   it('handles *nix style paths', function (done) {
-    var o = {
+    var o = anyPath({
       '.\\foo\\bar\\README.md': 99
-    }
-
-    anyPath(o)
+    })
 
     o['./foo/bar/README.md'].should.equal(99)
     return done()

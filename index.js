@@ -4,6 +4,8 @@ module.exports = function (obj) {
       defineGetters(prop, obj, obj[prop])
     }
   }
+
+  return obj
 }
 
 function defineGetters (prop, obj, value) {

@@ -12,10 +12,9 @@ preference for path separators (`\`, `/`).
 var assert = require('assert')
 
 var ap = require('./')
-var o = {
+var o = ap({
   './node_modules/any-path/package.json': {name: 'any-path'}
-}
-ap(o) // make any path work.
+})
 
 assert.equal(
   o['.\\node_modules\\any-path\\package.json'].name, 'any-path'
