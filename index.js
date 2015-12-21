@@ -1,4 +1,4 @@
-module.exports = function (obj) {
+function AnyPath (obj) {
   for (var prop in obj) {
     if (hasOwnProperty.call(obj, prop)) {
       setupHooks(prop, obj, obj[prop])
@@ -8,16 +8,43 @@ module.exports = function (obj) {
   return obj
 }
 
+AnyPath.restore = function (obj) {
+  for (var prop in obj) {
+    if (hasOwnProperty.call(obj, prop)) {
+      if (obj.__lookupGetter__(prop)) delete obj[prop]
+    }
+  }
+
+  return obj
+}
+
 function setupHooks (prop, obj, value) {
   var paths = allPaths(prop.split(/[\\/]/g))
+  var getter = function () {
+    return obj[prop]
+  }
 
+  // put the object back into its initial state.
+  obj.__restore__ = function () {
+    for (var prop in obj) {
+      if (hasOwnProperty.call(obj, prop)) {
+        if (obj.__lookupGetter__(prop) === getter) delete obj[prop]
+      }
+    }
+    delete obj.__restore__
+
+    return obj
+  }
+
+  // expand the object to have all possible paths.
   paths.forEach(function (path) {
-    obj.__defineGetter__(path, function () {
-      return value
-    })
-    obj.__defineSetter__(path, function (newValue) {
-      value = newValue
-    })
+    if (path !== prop) {
+      obj.__defineGetter__(path, getter)
+
+      obj.__defineSetter__(path, function (newValue) {
+        obj[prop] = newValue
+      })
+    }
   })
 }
 
@@ -39,3 +66,5 @@ function allPaths (splitPath, partialPath, finalPaths, i) {
 
   return finalPaths
 }
+
+module.exports = AnyPath
