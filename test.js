@@ -65,4 +65,16 @@ describe('any-test', function () {
     o['.\\foo\\bar\\README.md'].name.should.equal('package.json')
     return done()
   })
+
+  describe('restore', function () {
+    it('returns object back to its initial state', function (done) {
+      var o = anyPath({
+        '.\\foo\\bar\\README.md': {name: 'README.md'}
+      })
+      o.__restore__().should.deep.equal({
+        '.\\foo\\bar\\README.md': {name: 'README.md'}
+      })
+      return done()
+    })
+  })
 })

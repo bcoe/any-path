@@ -29,6 +29,21 @@ assert.equal(
 ) // lookup works \o/
 ```
 
+## API
+
+### __restore__
+
+Put the object back into its initial state.
+
+```js
+var o = anyPath({
+  '.\\foo\\bar\\README.md': {name: 'README.md'}
+})
+o.__restore__().should.deep.equal({
+  '.\\foo\\bar\\README.md': {name: 'README.md'}
+})
+```
+
 ## License
 
 ISC
