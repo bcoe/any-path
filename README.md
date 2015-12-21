@@ -31,7 +31,7 @@ assert.equal(
 
 ## API
 
-### __restore__
+### \_\_restore\_\_
 
 Put the object back into its initial state.
 
