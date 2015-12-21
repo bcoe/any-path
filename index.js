@@ -8,16 +8,6 @@ function AnyPath (obj) {
   return obj
 }
 
-AnyPath.restore = function (obj) {
-  for (var prop in obj) {
-    if (hasOwnProperty.call(obj, prop)) {
-      if (obj.__lookupGetter__(prop)) delete obj[prop]
-    }
-  }
-
-  return obj
-}
-
 function setupHooks (prop, obj, value) {
   var paths = allPaths(prop.split(/[\\/]/g))
   var getter = function () {
